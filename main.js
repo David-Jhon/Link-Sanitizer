@@ -4,9 +4,10 @@ function sanitizeURL() {
 
   try {
     const url = new URL(input);
-    const targetURL = url.searchParams.get("target_url");
+    
+    const targetURL = url.searchParams.get("u") || url.searchParams.get("target_url");
     const sanitizedURL = targetURL ?
-      decodeURIComponent(new URL(targetURL).origin + new URL(targetURL).pathname) :
+      decodeURIComponent(targetURL) :
       url.origin + url.pathname;
 
     resultBox.innerText = `Sanitized URL: ${sanitizedURL}`;
